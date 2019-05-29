@@ -1,35 +1,38 @@
 .flash-box
 .wrapper  
   .chat-side
-    .side__header 
-      %p.side__header_title masa
-      %ul.side__header_icons  
-        %li.side__header_text 
-          %a{ href:"name"}
-          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-        %li.side__header_setting   
-          %a{ href:"name"}
-          <i class="fa fa-cog" aria-hidden="true"></i>
+    .side-header 
+      .side-header__box
+        %p.side-header__box__title masa
+        %ul.side-header__box__icons  
+          %li.side-header__box__icons__text 
+            %a{ href:"name"}
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          %li.side-header__box__icons__setting   
+            %a{ href:"name"}
+            <i class="fa fa-cog" aria-hidden="true"></i>
     .side__main
       %p.side__main_username sample
       %p.side__main_text Good bye work 
   .chat-main
-    .main__header    
-      %h2.header__username masa-yossy
-      %ul.header__text
-        %li.header__text
-      .header__edit EDIT 
+    .main-header 
+      .main-header__head   
+        %h2.main-header__head__group sample
+        %ul.main-header__head__text Member:
+        %li.main-header__head__textw masayossy
+      %a{href:''} 
+      .header__edit Edit
     .main__messages
       .messages_message 
         %p.message_name YOSSY 
         %p.message_date 2019/2/3
-        %p.message_text Hello from the other side 
-      .messages_message 
-        %p.message_name MASA 
-        %p.message_date 2019/5/29 
-        %p.message_text Call me now 
-  .form
-    .form__blank 
-      %input{ class: "blank_text",id: "message-contents",type: "text",name: "message[content]",placeholder: "type a message"} 
-      %label{ class: ".blank_pic",for: "messafe_image"} 
-      %input{ class: "blank_send",type: "submit"} 
+      %p.message_text Hello from the other side 
+     
+    .form
+      %form{ class: "form__all"}
+        .form__blank 
+          %input{ class: "blank_text",id: "message-contents",type: "text",name: "message[content]",placeholder: "type a message"} 
+          %label{ class: "blank_pic",for: "messafe_image"}
+            %i.fa.fa-image 
+            %input{ class:"image-label__input",type: "file", name: "message[image]",id: "message_image"}
+        %input{ class: "blank_send",type: "submit",value: "Send"} 
