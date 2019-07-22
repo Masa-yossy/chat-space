@@ -1,41 +1,25 @@
 .flash-box
 .wrapper  
   =render 'shared/side_bar'
-  .chat-side
-    .side-header 
-      .side-header__box
-        %p.side-header__box__title masa
-        %ul.side-header__box__icons  
-          %li.side-header__box__icons__text 
-            %a{ href:"name"}
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-          %li.side-header__box__icons__setting   
-            %a{ href:"name"}
-            <i class="fa fa-cog" aria-hidden="true"></i>
-    .side__main
-      %p.side__main_username sample
-      %p.side__main_text Good bye work 
+  
+  
   .chat-main
     .main-header 
       .main-header__head   
         %h2.main-header__head__group sample
         %ul.main-header__head__text Member:
-        %li.main-header__head__textw masayossy
-      %a{href:''} 
+        %li.main-header__head__name masayossy
+      %a{href:'edit'} 
       .header__edit Edit
     .main__messages
-      .messages_message 
-        %p.message_name YOSSY 
-        %p.message_date 2019/2/3
-      %p.message_text Hello from the other side 
-     
+      = render @messages
     .form
       = form_for [@group, @message] do |f|
-        = f.text_field :content, class: 'form__message', placeholder: 'type a message'
-        .form__mask
-          = f.label :image, class: 'form__mask__image' do
-            = fa_icon 'picture-o', class: 'icon'
-            = f.file_field :image, class: 'hidden'
+        .form__blank
+          = f.text_field :content, class: 'form__blank__text', placeholder: 'type a message'
+          .form__mask
+            = f.label :image, class: 'form__mask__image' do
+              = fa_icon 'picture-o', class: 'icon'
+              = f.file_field :image, class: 'hidden'
         = f.submit 'Send', class: 'form__submit'
-.messages
-      = render @messages
+
