@@ -10,7 +10,7 @@ $ajax({
   url: url,
   type: "POST",
   data: formData
-  datatype: 'json',
+  dataType: 'json',
   processData: false,
   contentType: false
 })
