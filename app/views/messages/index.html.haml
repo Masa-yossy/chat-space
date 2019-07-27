@@ -1,6 +1,6 @@
 .flash-box
 .wrapper  
-  =render 'shared/side_bar'
+  =render 'shared/chat-side'
   
   
   .chat-main
@@ -20,6 +20,6 @@
           .form__mask
             = f.label :image, class: 'form__mask__image' do
               = fa_icon 'picture-o', class: 'icon'
-              = f.file_field :image, class: 'hidden'
+              = f.file_field :image, class: 'form__mask__hidden'
         = f.submit 'Send', class: 'form__submit'
 
