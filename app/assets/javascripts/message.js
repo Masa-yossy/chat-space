@@ -15,13 +15,24 @@ $(function(){
        <p class='lower-message__content'>
       ${content}
        </p>
-       <img src = ${img}>
+      ${img}
        
        </div>
        </div>
        `
     return html;
   }
+  function scroll(){
+    $('.main__messages').animate({scrollTop:
+    $('.main__messages')[0].scrollHeight},'fast');
+    
+  }
+    // var target = $('.message').last();
+    // var position = target.offset().top + $('.messages').scrollTop();
+    // $('.main_messages').animate({
+      // scrollTop: position
+    // }, 300, 'swing');
+    // }
 
 
 
@@ -43,24 +54,21 @@ $(function(){
   })
 
 .done(function(data){
-  var html = buildHTML(data);
-  $('.message').append(html);
-  $('.textbox').val('')
   
-  function scrollBottom(){
-    var target = $('.message').last();
-    var position = target.offset().top + $('.messages').scrollTop();
-    $('.messages').animate({
-      scrollTop: position
-    }, 300, 'swing');
-  }
-})
+  var html = buildHTML(data);
+  
+  $('.main__messages').append(html);
+  $('.form__blank').val('');
+  $('.form__submit').prop('disabled', false);
 
+  scroll();
+})
+  
 .fail(function(data){
   alert('error'); 
 })
 .always(function(data){
-  $('.form__submit').prop('disabled', false);
+  $('.form__blank').prop('disabled', false);
 })
 })
 })
