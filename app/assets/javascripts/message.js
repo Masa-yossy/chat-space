@@ -1,27 +1,50 @@
 $(function(){
+
   function buildHTML(message){
-    var content = message.content ? `${message.content}` : "";
-    var img = message.image ? `<img src= ${message.image}>` : "";
-    var html = `<div class='message', message-id= "${message.id}" >
-                  <div class='upper-message'>
-                    <div class='upper-message__user-name'>
-                      ${message.user_name}
-                    </div>
-                    <div class='upper-message__date'>
-                      ${message.date}
-                    </div>
-                  </div>
-                  <div class='lower-message'>
-                    <p class='lower-message__content'>
-                      ${content}
-                    </p>
-                    ${img}
-       
-                  </div>
-                 </div>`
-                       
+
+    image = (message.image) ? `<img class= "lower-message__image" src=${message.image} >` : ""; //三項演算子を使ってmessage.imageにtrueならHTML要素、faiseなら空の値を代入。
+
+    var html = `<div class="message" data-message-id="${message.id}"> 
+          <div class="upper-message">
+            <div class="upper-message__user-name">
+              ${message.user_name}
+            </div>
+            <div class="upper-message__date">
+              ${message.date}
+            </div>
+          </div>
+          <div class="lower-meesage">
+            <p class="lower-message__content">
+              ${message.content}
+            </p>
+            ${image}
+          </div>
+        </div>`
     return html;
   }
+  var reloadMessages = function() {
+    if (window.location.href.match(/\/groups\/\d+\/messages/))
+      var last_message_id = $('.message:last').data("message-id");
+
+    $.ajax({
+      url: "api/messages",
+      type: 'get',
+      dataType: 'json',
+      data: {last_id: last_message_id}
+    })
+    .done(function(messages){
+      var insertHTML = '';
+      messages.forEach(function (message){
+        insertHTML = buildHTML(message); 
+        $('.main__messages').append(insertHTML);
+      })
+        $('.main__messages').animate({ scrollTop: $('.main__messages')[0].scrollHeight},'fast');
+      })
+    .fail(function() {
+      alert('自動更新に失敗しました');
+    });
+  };
+
   function scroll(){
     $('.main__messages').animate({scrollTop:
     $('.main__messages')[0].scrollHeight},'fast');  
@@ -59,6 +82,7 @@ $(function(){
       $('.form__blank').prop('disabled', false);
     })
   })
-  })
+  setInterval(reloadMessages, 5000);
+  });
 });
   
