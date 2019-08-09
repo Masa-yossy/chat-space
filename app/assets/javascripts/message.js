@@ -23,9 +23,9 @@ $(function(){
     return html;
   }
   var reloadMessages = function() {
-    if (window.location.href.match(/\/groups\/\d+\/messages/))
+    if (window.location.href.match(/\/groups\/\d+\/messages/)){
       var last_message_id = $('.message:last').data("message-id");
-
+    
     $.ajax({
       url: "api/messages",
       type: 'get',
@@ -43,6 +43,7 @@ $(function(){
     .fail(function() {
       alert('自動更新に失敗しました');
     });
+    }
   };
 
   function scroll(){
@@ -71,7 +72,7 @@ $(function(){
       $('.main__messages').append(html);
       $('.form__blank').val('');
       $('.form__submit').prop('disabled', false);
-    
+    // if konourlnara seikihyougen group/xxx/message
       scroll();
     })
       
